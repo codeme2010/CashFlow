@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:id="@+id/pingtai"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        tools:text="美美理财"
+        android:maxLines="1" />
+    <View
+        android:layout_width="1px"
+        android:layout_height="25dp"
+        android:background="#666666" />
+    
+    <TextView
+        android:id="@+id/zhanghu"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        tools:text="1/3/5/7/9"
+        android:maxLines="1" />
+    <View
+        android:layout_width="1px"
+        android:layout_height="25dp"
+        android:background="#666666" />
+
+    <TextView
+        android:id="@+id/huikuanriqi"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        tools:text="2016/12/22"
+        android:maxLines="1" />
+    <View
+        android:layout_width="1px"
+        android:layout_height="25dp"
+        android:background="#666666" />
+
+    <TextView
+        android:id="@+id/huikuan"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        tools:text="000000"
+        android:maxLines="1" />
+    <View
+        android:layout_width="1px"
+        android:layout_height="25dp"
+        android:background="#666666" />
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        tools:text="0"
+        android:maxLines="1" />
+
+</LinearLayout>

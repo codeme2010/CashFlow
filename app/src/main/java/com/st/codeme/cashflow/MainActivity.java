@@ -3,64 +3,50 @@ package com.st.codeme.cashflow;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //页面列表
-    ArrayList<Fragment> fragmentList;
-    //标题列表
-    ArrayList<String> titleList = new ArrayList<String>();
+
+    List<Fragment> fragmentList = null;
+    ArrayList<String> titleList = null;
+    SectionsPagerAdapter spa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //Typeface font = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
-        //((TextView)findViewById(R.id.tv)).setTypeface(font);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        /*
-      The {@link android.support.v4.view.PagerAdapter} that will provide
-      fragments for each of the sections. We use a
-      {@link FragmentPagerAdapter} derivative, which will keep every
-      loaded fragment in memory. If this becomes too memory intensive, it
-      may be best to switch to a
-      {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-        fragment1 fm1 = new fragment1();
-        fragment2 fm2 = new fragment2();
-        fragment3 fm3 = new fragment3();
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(fm1);
-        fragmentList.add(fm2);
-        fragmentList.add(fm3);
+        fragmentList.add(new fragment1());
+        fragmentList.add(new fragment2());
+        fragmentList.add(new fragment3());
+        fragmentList.add(new fragment4());
 
+        titleList = new ArrayList<>();
         titleList.add("记账");
         titleList.add("回款明细");
         titleList.add("月报表");
-        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        titleList.add("账户信息");
 
-        // Set up the ViewPager with the sections adapter.
-        /*
-      The {@link ViewPager} that will host the section contents.
-     */
+        spa = new SectionsPagerAdapter(getSupportFragmentManager(),fragmentList, titleList);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(spa);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        openDatabase();
     }
 
     @Override
@@ -85,32 +71,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public Fragment getItem(int arg0) {
-            return fragmentList.get(arg0);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            // TODO Auto-generated method stub
-            return titleList.get(position);
+    // 复制小于1M的数据库程序
+    private void openDatabase() {
+        final App app = (App)getApplication();
+        app.DATABASE_PATH=MainActivity.this.getFilesDir().toString();
+        try {
+            String databaseFilename = app.DATABASE_PATH + "/" + app.DATABASE_FILENAME;
+            File dir = new File(app.DATABASE_PATH);
+            if (!dir.exists())
+                dir.mkdir();
+            if (!(new File(databaseFilename)).exists()) {
+                // 获得封装dictionary.db文件的InputStream对象
+                InputStream is = getResources().openRawResource(R.raw.cashflow);
+                FileOutputStream fos = new FileOutputStream(databaseFilename);
+                byte[] buffer = new byte[7168];
+                int count = 0;
+                // 开始复制dictionary.db文件
+                while ((count = is.read(buffer)) > 0) {
+                    fos.write(buffer, 0, count);
+                }
+                (Toast.makeText(this, "数据库创建成功",Toast.LENGTH_LONG)).show();
+                fos.close();
+                is.close();
+            }
+        } catch (Exception e) {
+            (Toast.makeText(this, "数据库创建错误：" + e.getMessage(),
+                    Toast.LENGTH_LONG)).show();
         }
     }
 }

@@ -1,12 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        android:text="第二个fragment"
-        />
-    
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="315dp"
+            android:layout_height="match_parent"
+            android:gravity="start|center"
+            android:text="显示全部"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:id="@+id/cb" />
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv"/>
+
 </LinearLayout>
