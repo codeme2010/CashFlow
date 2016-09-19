@@ -1,8 +1,4 @@
-package com.st.codeme.cashflow;
-
-/**
- * Created by codeme on 2016/9/13.
- */
+package com.codeme.cashflow;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

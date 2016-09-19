@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.app.Application;
 import android.widget.EditText;
@@ -7,12 +7,11 @@ import com.shamanland.fonticon.FontIconTypefaceHolder;
 
 
 public class App extends Application {
-    String DATABASE_PATH;
-    String DATABASE_FILENAME;
+    String DATABASE_PATH = System.getenv("EXTERNAL_STORAGE") + "/cashflow/";
+    String databaseFilename = DATABASE_PATH + "cashflow1.db";
     @Override
     public void onCreate() {
         super.onCreate();
-        DATABASE_FILENAME = "cashflow.db";
         FontIconTypefaceHolder.init(getAssets(), "fontawesome-webfont.ttf");
     }
 

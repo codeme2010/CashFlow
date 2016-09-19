@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import org.junit.Test;
 

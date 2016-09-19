@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ public class fragment4 extends Fragment {
 		mMainView = inflater.inflate(R.layout.fragment4, (ViewGroup)getActivity().findViewById(R.id.container), false);
 		et = (EditText)mMainView.findViewById(R.id.et);
 		lv = (ListView)mMainView.findViewById(R.id.lv_account);
-		db = new DBHelper(getActivity(),app.DATABASE_PATH + "/" + app.DATABASE_FILENAME,null,1);
+		db = new DBHelper(getActivity(),app.databaseFilename,null,1);
 		et.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -40,9 +40,9 @@ public class fragment4 extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				Cursor c = db.getReadableDatabase().rawQuery("SELECT _id, pingtai, zhanghu from cashflow " +
 						"where pingtai like '%" + s.toString() + "%' Group by pingtai,zhanghu",null);
-				adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_account,c,
+				adapter = new SimpleCursorAdapter(getActivity(), R.layout.item_account,c,
 						new String[]{"pingtai","zhanghu"},
-						new int[]{R.id.pingtai,R.id.zhanghu},0);
+						new int[]{R.id.pingtai, R.id.zhanghu},0);
 				lv.setAdapter(adapter);
 			}
 
@@ -84,9 +84,9 @@ public class fragment4 extends Fragment {
 		super.onResume();
 		Cursor c = db.getReadableDatabase().rawQuery("SELECT _id, pingtai, zhanghu from cashflow " +
 				"where pingtai like '%" + et.getText().toString() + "%' Group by pingtai,zhanghu",null);
-		adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_account,c,
+		adapter = new SimpleCursorAdapter(getActivity(), R.layout.item_account,c,
 				new String[]{"pingtai","zhanghu"},
-				new int[]{R.id.pingtai,R.id.zhanghu},0);
+				new int[]{R.id.pingtai, R.id.zhanghu},0);
 		lv.setAdapter(adapter);
 	}
 

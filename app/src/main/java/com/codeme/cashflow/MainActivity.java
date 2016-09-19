@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -74,16 +74,15 @@ public class MainActivity extends AppCompatActivity {
     // 复制小于1M的数据库程序
     private void openDatabase() {
         final App app = (App)getApplication();
-        app.DATABASE_PATH=MainActivity.this.getFilesDir().toString();
+//        app.DATABASE_PATH=MainActivity.this.getFilesDir().toString();
         try {
-            String databaseFilename = app.DATABASE_PATH + "/" + app.DATABASE_FILENAME;
             File dir = new File(app.DATABASE_PATH);
             if (!dir.exists())
                 dir.mkdir();
-            if (!(new File(databaseFilename)).exists()) {
+            if (!(new File(app.databaseFilename)).exists()) {
                 // 获得封装dictionary.db文件的InputStream对象
                 InputStream is = getResources().openRawResource(R.raw.cashflow);
-                FileOutputStream fos = new FileOutputStream(databaseFilename);
+                FileOutputStream fos = new FileOutputStream(app.databaseFilename);
                 byte[] buffer = new byte[7168];
                 int count = 0;
                 // 开始复制dictionary.db文件

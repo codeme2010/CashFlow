@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -35,7 +35,7 @@ public class fragment2 extends Fragment {
 		mMainView = inflater.inflate(R.layout.fragment2, (ViewGroup)getActivity().findViewById(R.id.container), false);
 
 		lv = (ListView)mMainView.findViewById(R.id.lv);
-		db = new DBHelper(getActivity(),app.DATABASE_PATH + "/" + app.DATABASE_FILENAME,null,1);
+		db = new DBHelper(getActivity(),app.databaseFilename,null,1);
 		cb = (CheckBox)mMainView.findViewById(R.id.cb);
 		cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -81,10 +81,11 @@ public class fragment2 extends Fragment {
 	}
 
 	void refresh(){
-		Cursor c = db.getReadableDatabase().rawQuery("select * from cashflow " +
-				(isC?"":"where state <> 3 ")+"order by _id desc",null);
+		Cursor c = db.getReadableDatabase().rawQuery("select _id, pingtai, zhanghu, date(shijian,'+'||suodingqi||' day') as huikuanriqi, " +
+				"round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan, state from cashflow " +
+				(isC?"":"where state <> 3 and huikuanriqi <= date('now','+7 day') ")+"order by _id",null);
 		adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_all,c,
-				new String[]{"_id","pingtai","zhanghu","shijian","benjin","state"},
+				new String[]{"_id","pingtai","zhanghu","huikuanriqi","huikuan","state"},
 				new int[]{R.id.id,R.id.pingtai,R.id.zhanghu,R.id.huikuanriqi,R.id.huikuan,R.id.state},0);
 		lv.setAdapter(adapter);
 	}

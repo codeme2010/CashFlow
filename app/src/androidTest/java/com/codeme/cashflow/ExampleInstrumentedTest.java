@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

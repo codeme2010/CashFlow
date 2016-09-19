@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -14,14 +14,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
     App app;
     EditText E_pingtai,E_zhanghu,E_benjin,E_shijian,E_suodingqi,E_piaoli,E_hongbao,E_fanxian,E_nianhua,E_beizhu;
+    Date date;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -49,11 +52,13 @@ public class fragment1 extends Fragment {
         E_hongbao.addTextChangedListener(tw);
         E_fanxian.addTextChangedListener(tw);
 
+        final SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String today = f.format(new java.util.Date());
 
-        String date = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new java.util.Date());
-        E_shijian.setText(date);
+        E_shijian.setText(today);
         //et_时间点击显示日期
-        E_shijian.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+/*        E_shijian.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 // TODO Auto-generated method stub
@@ -64,12 +69,17 @@ public class fragment1 extends Fragment {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            E_shijian.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            try {
+                                date = f.parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            E_shijian.setText(f.format(date));
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
                 }
             }
-        });
+        });*/
 
         E_shijian.setOnClickListener(new View.OnClickListener() {
 
@@ -82,7 +92,12 @@ public class fragment1 extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         // TODO Auto-generated method stub
-                        E_shijian.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                        try {
+                            date = f.parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        E_shijian.setText(f.format(date));
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -92,7 +107,7 @@ public class fragment1 extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DBHelper db=new DBHelper(getActivity(),app.DATABASE_PATH + "/" + app.DATABASE_FILENAME,null,1);
+                final DBHelper db=new DBHelper(getActivity(),app.databaseFilename,null,1);
                 db.getReadableDatabase().execSQL("insert into cashflow (pingtai, zhanghu, benjin, piaoli, shijian, " +
                         "suodingqi, hongbao, fanxian, nianhua, beizhu, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         new String[]{E_pingtai.getText().toString(),

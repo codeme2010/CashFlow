@@ -1,4 +1,4 @@
-package com.st.codeme.cashflow;
+package com.codeme.cashflow;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
