@@ -58,29 +58,6 @@ public class fragment1 extends Fragment {
         E_shijian.setText(today);
         //et_时间点击显示日期
 
-/*        E_shijian.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                // TODO Auto-generated method stub
-                if (hasFocus) {
-                    Calendar c = Calendar.getInstance();
-                    new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            // TODO Auto-generated method stub
-                            try {
-                                date = f.parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            E_shijian.setText(f.format(date));
-                        }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-                }
-            }
-        });*/
-
         E_shijian.setOnClickListener(new View.OnClickListener() {
 
             @Override

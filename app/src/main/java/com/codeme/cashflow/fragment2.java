@@ -50,7 +50,7 @@ public class fragment2 extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				state = Integer.parseInt(((TextView)view.findViewById(R.id.state)).getText().toString());
-				String s = "        state:";
+				String s = "        状态:";
 				final String[] item = {"刚投资完成"+s+" 0", "已返现成功"+s+" 1", "已申请提现"+s+" 2", "已回款完成"+s+" 3", "删除此记录"};
 				final String _id = ((TextView)view.findViewById(R.id.id)).getText().toString();
 				new AlertDialog.Builder(getActivity())
@@ -82,11 +82,14 @@ public class fragment2 extends Fragment {
 
 	void refresh(){
 		Cursor c = db.getReadableDatabase().rawQuery("select _id, pingtai, zhanghu, date(shijian,'+'||suodingqi||' day') as huikuanriqi, " +
-				"round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan, state from cashflow " +
-				(isC?"":"where state <> 3 and huikuanriqi <= date('now','+7 day') ")+"order by _id",null);
+				"round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan, " +
+				"benjin, shijian, suodingqi, piaoli, hongbao, fanxian, nianhua, state, beizhu from cashflow " +
+				(isC?"where state <> 3 and huikuanriqi <= date('now','+7 day') ":"")+"order by huikuanriqi",null);
 		adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_all,c,
-				new String[]{"_id","pingtai","zhanghu","huikuanriqi","huikuan","state"},
-				new int[]{R.id.id,R.id.pingtai,R.id.zhanghu,R.id.huikuanriqi,R.id.huikuan,R.id.state},0);
+				new String[]{"_id","pingtai","zhanghu","benjin","shijian","suodingqi","huikuanriqi",
+						"piaoli","hongbao","fanxian","huikuan","nianhua","state","beizhu"},
+				new int[]{R.id.id,R.id.pingtai,R.id.zhanghu,R.id.benjin,R.id.shijian,R.id.suodingqi,R.id.huikuanriqi,
+						R.id.piaoli,R.id.hongbao,R.id.fanxian,R.id.huikuan,R.id.nianhua,R.id.state,R.id.beizhu},0);
 		lv.setAdapter(adapter);
 	}
 
@@ -99,7 +102,6 @@ public class fragment2 extends Fragment {
 		if (p != null) {
 			p.removeAllViewsInLayout();
 		}
-		Log.v("huahua", "fragment2-->onCreateView");
 
 		return mMainView;
 	}
@@ -114,7 +116,6 @@ public class fragment2 extends Fragment {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		Log.v("huahua", "fragment2-->onPause()");
 	}
 
 	@Override
@@ -122,21 +123,18 @@ public class fragment2 extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		refresh();
-		Log.v("huahua", "fragment2-->onResume()");
 	}
 
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Log.v("huahua", "fragment2-->onStart()");
 	}
 
 	@Override
 	public void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Log.v("huahua", "fragment2-->onStop()");
 	}
 
 }
