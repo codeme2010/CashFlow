@@ -5,8 +5,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
@@ -51,16 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
     // 复制小于1M的数据库程序
     private void openDatabase() {
-        final App app = (App)getApplication();
 //        app.DATABASE_PATH=MainActivity.this.getFilesDir().toString();
         try {
-            File dir = new File(app.DATABASE_PATH);
+            File dir = new File(App.DATABASE_PATH);
             if (!dir.exists())
                 dir.mkdir();
-            if (!(new File(app.databaseFilename)).exists()) {
+            if (!(new File(App.databaseFilename)).exists()) {
                 // 获得封装dictionary.db文件的InputStream对象
                 InputStream is = getResources().openRawResource(R.raw.cashflow);
-                FileOutputStream fos = new FileOutputStream(app.databaseFilename);
+                FileOutputStream fos = new FileOutputStream(App.databaseFilename);
                 byte[] buffer = new byte[7168];
                 int count = 0;
                 // 开始复制dictionary.db文件

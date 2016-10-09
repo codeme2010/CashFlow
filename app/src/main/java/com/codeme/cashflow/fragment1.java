@@ -1,6 +1,7 @@
 package com.codeme.cashflow;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -22,7 +23,6 @@ import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
-    App app;
     EditText E_pingtai,E_zhanghu,E_benjin,E_shijian,E_suodingqi,E_piaoli,E_hongbao,E_fanxian,E_nianhua,E_beizhu;
     Date date;
     @Override
@@ -32,9 +32,6 @@ public class fragment1 extends Fragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment1, (ViewGroup) getActivity().findViewById(R.id.container), false);
-
-        app = (App)getActivity().getApplication();
-
         E_pingtai = (EditText) mMainView.findViewById(R.id.et_平台);
         E_zhanghu = (EditText) mMainView.findViewById(R.id.et_账户);
         E_benjin = (EditText) mMainView.findViewById(R.id.et_本金);
@@ -84,9 +81,22 @@ public class fragment1 extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DBHelper db=new DBHelper(getActivity(),app.databaseFilename,null,1);
-                db.getReadableDatabase().execSQL("insert into cashflow (pingtai, zhanghu, benjin, piaoli, shijian, " +
-                        "suodingqi, hongbao, fanxian, nianhua, beizhu, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                ContentValues values = new ContentValues();
+                values.put("pingtai",E_pingtai.getText().toString());
+                values.put("zhanghu",E_zhanghu.getText().toString());
+                values.put("benjin",E_benjin.getText().toString());
+                values.put("piaoli",E_piaoli.getText().toString());
+                values.put("shijian",E_shijian.getText().toString());
+                values.put("suodingqi",E_suodingqi.getText().toString());
+                values.put("hongbao",E_hongbao.getText().toString());
+                values.put("fanxian",E_fanxian.getText().toString());
+                values.put("nianhua",E_nianhua.getText().toString());
+                values.put("beizhu",E_beizhu.getText().toString());
+                values.put("state","0");
+                getContext().getContentResolver().insert(App.CONTENT_URI,values);
+ /*
+                App.db.execSQL("insert into cashflow (pingtai, zhanghu, benjin, piaoli, shijian, " +
+                                "suodingqi, hongbao, fanxian, nianhua, beizhu, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         new String[]{E_pingtai.getText().toString(),
                                 E_zhanghu.getText().toString(),
                                 E_benjin.getText().toString(),
@@ -99,7 +109,7 @@ public class fragment1 extends Fragment {
                                 E_beizhu.getText().toString(),
                                 "0"});
                 MainActivity m = (MainActivity)getActivity();
-                m.spa.notifyDataSetChanged();
+                m.spa.notifyDataSetChanged();*/
                 Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
 //                Log.d("fragment1",E.getText().toString());
             }
@@ -119,8 +129,9 @@ public class fragment1 extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (app.str2int(E_benjin)>0 && app.str2int(E_suodingqi)>0){
-                E_nianhua.setText(String.format("%.1f",(app.str2int(E_hongbao)+app.str2int(E_fanxian))/app.str2int(E_benjin)*36500/app.str2int(E_suodingqi)+app.str2int(E_piaoli)));
+            if (App.str2int(E_benjin)>0 && App.str2int(E_suodingqi)>0){
+                E_nianhua.setText(String.format(Locale.getDefault(),"%.1f",(App.str2int(E_hongbao)
+                        +App.str2int(E_fanxian))/App.str2int(E_benjin)*36500/App.str2int(E_suodingqi)+App.str2int(E_piaoli)));
             }
         }
     };
