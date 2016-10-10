@@ -16,11 +16,12 @@
             tools:text="待收总计:200000"/>
         <TextView
             android:layout_marginLeft="5dp"
-            android:layout_width="160dp"
+            android:layout_width="145dp"
             android:layout_height="match_parent"
-            android:gravity="start|center"
-            android:text="仅显示近7天回款项目"/>
+            android:gravity="end|center"
+            android:text="显示全部"/>
         <CheckBox
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

@@ -31,7 +31,6 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
     Cursor cursor;
     int state;
     String selection = null;
-    static final String select = "state <> 3 and huikuanriqi <= date('now','+7 day')";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -171,7 +170,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
         String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi",
                 "round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
                 "benjin", "shijian", "suodingqi", "piaoli", "hongbao", "fanxian", "nianhua", "state", "beizhu"};
-        selection = isC ? select : "state <> 3";
+        selection = isC ? null : "state <> 3";
         return new CursorLoader(getContext(), App.CONTENT_URI, projection, selection, null, " huikuanriqi");
     }
 
