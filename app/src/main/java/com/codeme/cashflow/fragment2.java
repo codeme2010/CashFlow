@@ -47,10 +47,10 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                         "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
         cursor.moveToFirst();
         tv.setText("待回合计：" + cursor.getString(0));
-        String[] uiBindFrom = { "_id","pingtai","zhanghu","huikuanriqi","huikuan","benjin","shijian",
-                "suodingqi","piaoli","hongbao","fanxian","nianhua","state","beizhu"};
-        int[] uiBindTo = { R.id.id,R.id.pingtai,R.id.zhanghu,R.id.huikuanriqi,R.id.huikuan,R.id.benjin,R.id.shijian,R.id.suodingqi,
-                R.id.piaoli,R.id.hongbao,R.id.fanxian,R.id.nianhua,R.id.state,R.id.beizhu};
+        String[] uiBindFrom = { "_id","pingtai","zhanghu","huikuan","huikuanriqi","state","nianhua",
+                "benjin","shijian","beizhu"};
+        int[] uiBindTo = { R.id.id,R.id.pingtai,R.id.zhanghu,R.id.huikuan,R.id.huikuanriqi,R.id.state,R.id.nianhua,
+                R.id.benjin,R.id.shijian,R.id.beizhu};
         getLoaderManager().initLoader(2, null, this);
         adapter = new SimpleCursorAdapter(
                 getContext(), R.layout.item_all,
@@ -167,9 +167,9 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi",
-                "round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
-                "benjin", "shijian", "suodingqi", "piaoli", "hongbao", "fanxian", "nianhua", "state", "beizhu"};
+        String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi", "state","nianhua||'%' as nianhua",
+                "'￥'||round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
+                "'￥'||cast(round(benjin,0)as int)||' + '||cast(round(hongbao,0)as int)||' + '||cast(round(fanxian,0)as int)||' + '||piaoli||'%' as benjin", "shijian||' + '||suodingqi||'天' as shijian", "'备:'||beizhu as beizhu"};
         selection = isC ? null : "state <> 3";
         return new CursorLoader(getContext(), App.CONTENT_URI, projection, selection, null, " huikuanriqi");
     }
