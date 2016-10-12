@@ -169,7 +169,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi", "state","cast(round(nianhua,0)as int)||'%' as nianhua",
                 "'￥'||round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
-                "'￥'||cast(round(benjin,0)as int)||' + '||cast(round(hongbao,0)as int)||' + '||cast(round(fanxian,0)as int)||' + '||piaoli||'%' as benjin", "shijian||' + '||suodingqi||'天' as shijian", "'备:'||beizhu as beizhu"};
+                "'￥'||cast(round(benjin,0)as int)||' + '||cast(round(hongbao,0)as int)||' + '||cast(round(fanxian,0)as int)||' + '||piaoli||'%' as benjin", "shijian||' + '||suodingqi||'天' as shijian", "beizhu"};
         selection = isC ? null : "state <> 3";
         return new CursorLoader(getContext(), App.CONTENT_URI, projection, selection, null, " huikuanriqi");
     }

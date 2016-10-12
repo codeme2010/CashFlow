@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(new fragment1());
         fragmentList.add(new fragment2());
+        fragmentList.add(new fragment1());
         fragmentList.add(new fragment3());
         fragmentList.add(new fragment4());
 
         titleList = new ArrayList<>();
-        titleList.add("记账");
         titleList.add("回款明细");
+        titleList.add("记账");
         titleList.add("月报表");
         titleList.add("账户信息");
 
