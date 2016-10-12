@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 (Toast.makeText(this, "数据库创建成功",Toast.LENGTH_LONG)).show();
                 fos.close();
                 is.close();
-                return true;
             }
         } catch (Exception e) {
             (Toast.makeText(this, "数据库创建错误：" + e.getMessage(),
                     Toast.LENGTH_LONG)).show();
+            return false;
         }
-        return false;
+        return true;
     }
 }
