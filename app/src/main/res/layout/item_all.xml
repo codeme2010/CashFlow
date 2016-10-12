@@ -55,7 +55,7 @@
                     android:id="@+id/state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.8"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#08F"
@@ -64,7 +64,7 @@
                     android:id="@+id/nianhua"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="3.5"
                     android:layout_gravity="center"
                     android:gravity="center"
                     tools:text="折合"/>

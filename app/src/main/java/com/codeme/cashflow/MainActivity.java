@@ -1,5 +1,6 @@
 package com.codeme.cashflow;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (openDatabase())
+        App.db = SQLiteDatabase.openOrCreateDatabase(App.databaseFilename,null);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -44,11 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        openDatabase();
     }
 
     // 复制小于1M的数据库程序
-    private void openDatabase() {
+    private Boolean openDatabase() {
 //        app.DATABASE_PATH=MainActivity.this.getFilesDir().toString();
         try {
             File dir = new File(App.DATABASE_PATH);
@@ -67,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 (Toast.makeText(this, "数据库创建成功",Toast.LENGTH_LONG)).show();
                 fos.close();
                 is.close();
+                return true;
             }
         } catch (Exception e) {
             (Toast.makeText(this, "数据库创建错误：" + e.getMessage(),
                     Toast.LENGTH_LONG)).show();
         }
+        return false;
     }
 }

@@ -18,7 +18,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        db = SQLiteDatabase.openOrCreateDatabase(databaseFilename,null);
         FontIconTypefaceHolder.init(getAssets(), "fontawesome-webfont.ttf");
     }
 
