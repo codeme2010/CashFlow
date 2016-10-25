@@ -2,6 +2,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="start|center"
+        android:id="@+id/sum_all"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#666666" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -3,6 +3,7 @@ package com.codeme.cashflow;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,12 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getItemPosition(Object object)
     {
-        return POSITION_NONE;
+        String fg = object.toString().substring(0,9);
+        if(fg.equals("fragment2")||fg.equals("fragment3")){
+            return POSITION_NONE;
+        }else{
+            return POSITION_UNCHANGED;
+        }
     }
 
 }

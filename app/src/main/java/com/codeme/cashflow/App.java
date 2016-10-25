@@ -3,6 +3,7 @@ package com.codeme.cashflow;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.view.View;
 import android.widget.EditText;
 
 import com.shamanland.fonticon.FontIconTypefaceHolder;

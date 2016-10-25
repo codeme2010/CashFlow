@@ -8,6 +8,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 	ListView lv,lv_mingxi;
 	SimpleCursorAdapter adapter,adapter_mingxi;
 	String month;
+	Cursor cursor;
+	TextView tv;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,10 +31,16 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = inflater.inflate(R.layout.fragment3, (ViewGroup)getActivity().findViewById(R.id.container), false);
+		tv = (TextView)mMainView.findViewById(R.id.sum_all);
+		cursor = getContext().getContentResolver().query(App.CONTENT_URI,
+				new String[]{"sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)"},null,null,null);
+		cursor.moveToFirst();
+		tv.setText("总计：" + cursor.getString(0));
+		cursor.close();
 		lv = (ListView)mMainView.findViewById(R.id.lv_baobiao);
 		lv_mingxi = (ListView)mMainView.findViewById(R.id.lv_mingxi);
 		String[] uiBindFrom0 = {"month","heji"};
-		int[] uiBindTo0 = {R.id.month,R.id.sum};
+		int[] uiBindTo0 = {R.id.month_baobiao,R.id.sum_baobiao};
 		String[] uiBindFrom1 = {"pingtai","heji"};
 		int[] uiBindTo1 = {R.id.pingtai, R.id.sum};
 		getLoaderManager().initLoader(30, null, this);
@@ -50,31 +59,11 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				month = ((TextView)view.findViewById(R.id.month)).getText().toString();
+				month = ((TextView)view.findViewById(R.id.month_baobiao)).getText().toString();
 				getLoaderManager().restartLoader(31,null,fragment3.this);
 			}
 		});
 	}
-/*
-	void refresh(int i){
-		if (i==0) {
-			Cursor c = App.db.rawQuery("select _id, strftime('%Y-%m',shijian) as month, " +
-					"round(sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)) as heji from cashflow group by month", null);
-			adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_baobiao,c,
-					new String[]{"month","heji"},
-					new int[]{R.id.month,R.id.sum},0);
-			lv.setAdapter(adapter);
-		}
-		else {
-			Cursor c_mingxi = App.db.rawQuery("select _id, pingtai, " +
-					"round(sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)) as heji from cashflow " +
-					"where strftime('%Y-%m',shijian)='" + month + "' group by pingtai", null);
-			adapter_mingxi = new SimpleCursorAdapter(getActivity(), R.layout.item_mingxi, c_mingxi,
-					new String[]{"pingtai", "heji"},
-					new int[]{R.id.pingtai, R.id.sum}, 0);
-			lv_mingxi.setAdapter(adapter_mingxi);
-		}
-	}*/
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,6 +92,14 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
+		tv = (TextView)mMainView.findViewById(R.id.sum_all);
+		cursor = getContext().getContentResolver().query(App.CONTENT_URI,
+				new String[]{"sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)"},null,null,null);
+		cursor.moveToFirst();
+		tv.setText("总计：" + cursor.getString(0));
+		cursor.close();
+		getLoaderManager().restartLoader(30, null, this);
+		getLoaderManager().restartLoader(31, null, this);
 		super.onResume();
 	}
 

@@ -11,6 +11,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                         "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
         cursor.moveToFirst();
         tv.setText("待回合计：" + cursor.getString(0));
+        cursor.close();
         String[] uiBindFrom = { "_id","pingtai","zhanghu","huikuan","huikuanriqi","state","nianhua",
                 "benjin","shijian","beizhu"};
         int[] uiBindTo = { R.id.id,R.id.pingtai,R.id.zhanghu,R.id.huikuan,R.id.huikuanriqi,R.id.state,R.id.nianhua,
@@ -56,15 +58,6 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                 getContext(), R.layout.item_all,
                 null, uiBindFrom, uiBindTo,
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        /*Cursor c = App.db.rawQuery("select _id, pingtai, zhanghu, date(shijian,'+'||suodingqi||' day') as huikuanriqi, " +
-                "round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan, " +
-                "benjin, shijian, suodingqi, piaoli, hongbao, fanxian, nianhua, state, beizhu from cashflow " +
-                (isC?"where state <> 3 and huikuanriqi <= date('now','+7 day') ":"")+"order by huikuanriqi",null);
-        adapter = new SimpleCursorAdapter(getActivity(),R.layout.item_all,c,
-                new String[]{"_id","pingtai","zhanghu","benjin","shijian","suodingqi","huikuanriqi",
-                        "piaoli","hongbao","fanxian","huikuan","nianhua","state","beizhu"},
-                new int[]{R.id.id,R.id.pingtai,R.id.zhanghu,R.id.benjin,R.id.shijian,R.id.suodingqi,R.id.huikuanriqi,
-                        R.id.piaoli,R.id.hongbao,R.id.fanxian,R.id.huikuan,R.id.nianhua,R.id.state,R.id.beizhu},0);*/
         lv.setAdapter(adapter);
 
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -113,6 +106,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                                                 "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
                                 cursor.moveToFirst();
                                 tv.setText("待回合计：" + cursor.getString(0));
+                                cursor.close();
 //                                refresh();
                             }
                         })
@@ -150,6 +144,12 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
     @Override
     public void onResume() {
         // TODO Auto-generated method stub
+        cursor = getContext().getContentResolver().query(App.CONTENT_URI,
+                new String[]{"sum(round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state " +
+                        "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
+        cursor.moveToFirst();
+        tv.setText("待回合计：" + cursor.getString(0));
+        cursor.close();
         super.onResume();
     }
 

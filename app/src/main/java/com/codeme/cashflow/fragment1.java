@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -107,9 +109,9 @@ public class fragment1 extends Fragment {
                                 E_fanxian.getText().toString(),
                                 E_nianhua.getText().toString(),
                                 E_beizhu.getText().toString(),
-                                "0"});
+                                "0"});*/
                 MainActivity m = (MainActivity)getActivity();
-                m.spa.notifyDataSetChanged();*/
+                m.spa.notifyDataSetChanged();
                 Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
 //                Log.d("fragment1",E.getText().toString());
             }
@@ -144,8 +146,6 @@ public class fragment1 extends Fragment {
         if (p != null) {
             p.removeAllViewsInLayout();
         }
-
-        Log.v("huahua", "fragment1-->onCreatView()");
         return mMainView;
     }
 
@@ -159,28 +159,24 @@ public class fragment1 extends Fragment {
     public void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        Log.v("huahua", "fragment1-->onPause()");
     }
 
     @Override
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        Log.v("huahua", "fragment1-->onResume()");
     }
 
     @Override
     public void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        Log.v("huahua", "fragment1-->onStart()");
     }
 
     @Override
     public void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
-        Log.v("huahua", "fragment1-->onStop()");
     }
 
 }

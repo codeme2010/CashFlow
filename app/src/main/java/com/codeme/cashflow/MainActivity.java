@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 InputStream is = getResources().openRawResource(R.raw.cashflow);
                 FileOutputStream fos = new FileOutputStream(App.databaseFilename);
                 byte[] buffer = new byte[7168];
-                int count = 0;
+                int count;
                 // 开始复制dictionary.db文件
                 while ((count = is.read(buffer)) > 0) {
                     fos.write(buffer, 0, count);
