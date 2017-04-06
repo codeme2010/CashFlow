@@ -119,6 +119,7 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String selection = null;
 		String[] projection = null;
+		String sortOrder = null;
 		Uri uri = App.CONTENT_URI;
 		switch (id){
 			case 30:
@@ -131,9 +132,10 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 				projection = new String[]{"_id", "pingtai",
 						"round(sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)) as heji"};
 				uri = Uri.withAppendedPath(uri,"group/pingtai");
+				sortOrder = "heji desc";
 				break;
 		}
-		return new CursorLoader(getContext(), uri, projection, selection, null, null);
+		return new CursorLoader(getContext(), uri, projection, selection, null, sortOrder);
 	}
 
 	@Override

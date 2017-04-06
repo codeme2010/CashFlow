@@ -5,24 +5,31 @@
     android:orientation="vertical"
     android:tag="fg2">
     <LinearLayout
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/zongji"
             android:layout_marginLeft="5dp"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:gravity="start|center"
             tools:text="待收总计:200000"/>
+        <EditText
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_sch_Key"
+            android:textSize="14sp"
+            android:gravity="center"
+            tools:text="陆金所"/>
         <TextView
             android:layout_marginLeft="5dp"
-            android:layout_width="145dp"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="end|center"
             android:text="显示全部"/>
         <CheckBox
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

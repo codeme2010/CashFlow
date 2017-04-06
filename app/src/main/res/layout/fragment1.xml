@@ -1,195 +1,230 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-    <TableLayout
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:stretchColumns="1">
+    android:layout_height="match_parent">
 
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="平台"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/et_平台"
-            tools:text="陆金所"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionNext"/>
-    </TableRow>
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="账户"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/et_账户"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="本金(元)"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_本金"
-            android:textSize="14sp"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:imeOptions="actionNext"/>
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="投资时间"
-            />
-        <com.shamanland.fonticon.FontIconEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_时间"
-            android:textSize="14sp"
-            app:iconRight="@xml/ic_right"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="锁定期(天)"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_锁定期"
-            android:textSize="14sp"
-            android:inputType="number"
-            android:maxLines="1"
-            android:imeOptions="actionNext"/>
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="票利(%)"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_票利"
-            android:textSize="14sp"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="红包"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_红包"
-            android:textSize="14sp"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="返现"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_返现"
-            android:textSize="14sp"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="折合年化(%)"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_折合年化"
-            android:textSize="14sp"
-            android:focusable="false"/>
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:gravity="end|center_vertical"
-            android:text="备注"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_备注"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionNext" />
-    </TableRow>
-    <Button
-        android:text="记入"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/bt_记入" />
-</TableLayout>
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="平台" />
+
+            <EditText
+                android:id="@+id/et_平台"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp"
+                tools:text="陆金所" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="账户" />
+
+            <EditText
+                android:id="@+id/et_账户"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="本金(元)" />
+
+            <EditText
+                android:id="@+id/et_本金"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="投资时间" />
+
+            <com.shamanland.fonticon.FontIconEditText
+                android:id="@+id/et_时间"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp"
+                app:iconRight="@xml/ic_right" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="锁定期(天)" />
+
+            <EditText
+                android:id="@+id/et_锁定期"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="票利(%)" />
+
+            <EditText
+                android:id="@+id/et_票利"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="红包" />
+
+            <EditText
+                android:id="@+id/et_红包"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="返现" />
+
+            <EditText
+                android:id="@+id/et_返现"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="折合年化(%)" />
+
+            <EditText
+                android:id="@+id/et_折合年化"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:gravity="end|center_vertical"
+                android:text="备注" />
+
+            <EditText
+                android:id="@+id/et_备注"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <Button
+            android:id="@+id/bt_记入"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="记入" />
+
+        <TableRow>
+            <Button
+                android:id="@+id/bt_查询"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:text="查询ID" />
+            <EditText
+                android:id="@+id/et_查询"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </TableRow>
+    </TableLayout>
 </ScrollView>

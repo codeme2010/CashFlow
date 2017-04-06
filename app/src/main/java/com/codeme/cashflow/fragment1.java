@@ -1,7 +1,9 @@
 package com.codeme.cashflow;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +27,7 @@ import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
-    EditText E_pingtai,E_zhanghu,E_benjin,E_shijian,E_suodingqi,E_piaoli,E_hongbao,E_fanxian,E_nianhua,E_beizhu;
+    EditText E_pingtai,E_zhanghu,E_benjin,E_shijian,E_suodingqi,E_piaoli,E_hongbao,E_fanxian,E_nianhua,E_beizhu,E_sch;
     Date date;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class fragment1 extends Fragment {
         E_fanxian = (EditText) mMainView.findViewById(R.id.et_返现);
         E_nianhua = (EditText) mMainView.findViewById(R.id.et_折合年化);
         E_beizhu = (EditText) mMainView.findViewById(R.id.et_备注);
+        E_sch = (EditText) mMainView.findViewById(R.id.et_查询);
 
         E_benjin.addTextChangedListener(tw);
         E_suodingqi.addTextChangedListener(tw);
@@ -59,6 +62,7 @@ public class fragment1 extends Fragment {
 
         E_shijian.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -80,6 +84,7 @@ public class fragment1 extends Fragment {
         });
 
         Button bt = (Button)mMainView.findViewById(R.id.bt_记入);
+        Button bt_sch = (Button)mMainView.findViewById(R.id.bt_查询);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +121,23 @@ public class fragment1 extends Fragment {
 //                Log.d("fragment1",E.getText().toString());
             }
         });
+        bt_sch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] projection = {"pingtai","zhanghu","benjin","piaoli","shijian","suodingqi","hongbao","fanxian","beizhu","state"};
+                Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI,projection,"_id =" + E_sch.getText().toString(),null,null);
+                cursor.moveToFirst();
+                E_pingtai.setText(cursor.getString(0));
+                E_zhanghu.setText(cursor.getString(1));
+                E_benjin.setText(cursor.getString(2));
+                E_piaoli.setText(cursor.getString(3));
+                E_shijian.setText(cursor.getString(4));
+                E_suodingqi.setText(cursor.getString(5));
+                E_hongbao.setText(cursor.getString(6));
+                E_fanxian.setText(cursor.getString(7));
+                E_beizhu.setText(cursor.getString(8));
+            }
+        });
     }
 
     TextWatcher tw = new TextWatcher() {
@@ -137,6 +159,7 @@ public class fragment1 extends Fragment {
             }
         }
     };
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

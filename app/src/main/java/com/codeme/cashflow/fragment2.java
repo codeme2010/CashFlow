@@ -11,6 +11,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ import android.widget.TextView;
 public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     View mMainView;
     CheckBox cb;
+    EditText et;
     Boolean isC = false;
     ListView lv;
     TextView tv;
@@ -32,6 +36,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
     Cursor cursor;
     int state;
     String selection = null;
+    String sch_Key = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -43,6 +48,7 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
         lv = (ListView)mMainView.findViewById(R.id.lv);
         cb = (CheckBox)mMainView.findViewById(R.id.cb);
         tv = (TextView)mMainView.findViewById(R.id.zongji);
+        et = (EditText)mMainView.findViewById(R.id.et_sch_Key);
         cursor = getContext().getContentResolver().query(App.CONTENT_URI,
                 new String[]{"sum(round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state " +
                         "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
@@ -59,7 +65,23 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                 null, uiBindFrom, uiBindTo,
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         lv.setAdapter(adapter);
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                sch_Key = "pingtai like '%" + charSequence.toString() + "%'";
+                getLoaderManager().restartLoader(2, null, fragment2.this);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -90,7 +112,6 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
                                 Uri uri = Uri.withAppendedPath(App.CONTENT_URI,_id);
                                 if (state == 4){
                                     getContext().getContentResolver().delete(uri,null,null);
-
                                     /*App.db.execSQL("delete from cashflow where _id = ?",
                                             new String[]{_id});*/
                                 }
@@ -170,7 +191,8 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
         String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi", "state","cast(round(nianhua,0)as int)||'%' as nianhua",
                 "'￥'||round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
                 "'￥'||cast(round(benjin,0)as int)||' + '||cast(round(hongbao,0)as int)||' + '||cast(round(fanxian,0)as int)||' + '||piaoli||'%' as benjin", "shijian||' + '||suodingqi||'天' as shijian", "beizhu"};
-        selection = isC ? null : "state <> 3";
+        selection = sch_Key==null ? (isC ? "" : "state <> 3") : sch_Key + (isC ? "" : "and state <> 3");
+        //selection = isC ? null : "state <> 3";
         return new CursorLoader(getContext(), App.CONTENT_URI, projection, selection, null, " huikuanriqi");
     }
 

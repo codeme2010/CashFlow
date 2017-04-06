@@ -52,7 +52,7 @@ public class fragment4 extends Fragment implements LoaderManager.LoaderCallbacks
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				selection = "pingtai like '%" + s.toString() + "%'";
-				getLoaderManager().restartLoader(1, null, fragment4.this);
+				getLoaderManager().restartLoader(4, null, fragment4.this);
 
 				/*Cursor c = App.db.rawQuery("SELECT _id, pingtai, zhanghu from cashflow " +
 						"where pingtai like '%" + s.toString() + "%' Group by pingtai,zhanghu",null);
