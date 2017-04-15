@@ -27,8 +27,9 @@ import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
-    EditText E_pingtai,E_zhanghu,E_benjin,E_shijian,E_suodingqi,E_piaoli,E_hongbao,E_fanxian,E_nianhua,E_beizhu,E_sch;
+    EditText E_pingtai, E_zhanghu, E_benjin, E_shijian, E_suodingqi, E_piaoli, E_hongbao, E_fanxian, E_nianhua, E_beizhu, E_sch;
     Date date;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -83,24 +84,24 @@ public class fragment1 extends Fragment {
             }
         });
 
-        Button bt = (Button)mMainView.findViewById(R.id.bt_记入);
-        Button bt_sch = (Button)mMainView.findViewById(R.id.bt_查询);
+        Button bt = (Button) mMainView.findViewById(R.id.bt_记入);
+        Button bt_sch = (Button) mMainView.findViewById(R.id.bt_查询);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
-                values.put("pingtai",E_pingtai.getText().toString());
-                values.put("zhanghu",E_zhanghu.getText().toString());
-                values.put("benjin",E_benjin.getText().toString());
-                values.put("piaoli",E_piaoli.getText().toString());
-                values.put("shijian",E_shijian.getText().toString());
-                values.put("suodingqi",E_suodingqi.getText().toString());
-                values.put("hongbao",E_hongbao.getText().toString());
-                values.put("fanxian",E_fanxian.getText().toString());
-                values.put("nianhua",E_nianhua.getText().toString());
-                values.put("beizhu",E_beizhu.getText().toString());
-                values.put("state","0");
-                getContext().getContentResolver().insert(App.CONTENT_URI,values);
+                values.put("pingtai", E_pingtai.getText().toString());
+                values.put("zhanghu", E_zhanghu.getText().toString());
+                values.put("benjin", E_benjin.getText().toString());
+                values.put("piaoli", E_piaoli.getText().toString());
+                values.put("shijian", E_shijian.getText().toString());
+                values.put("suodingqi", E_suodingqi.getText().toString());
+                values.put("hongbao", E_hongbao.getText().toString());
+                values.put("fanxian", E_fanxian.getText().toString());
+                values.put("nianhua", E_nianhua.getText().toString());
+                values.put("beizhu", E_beizhu.getText().toString());
+                values.put("state", "0");
+                getContext().getContentResolver().insert(App.CONTENT_URI, values);
  /*
                 App.db.execSQL("insert into cashflow (pingtai, zhanghu, benjin, piaoli, shijian, " +
                                 "suodingqi, hongbao, fanxian, nianhua, beizhu, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -115,17 +116,19 @@ public class fragment1 extends Fragment {
                                 E_nianhua.getText().toString(),
                                 E_beizhu.getText().toString(),
                                 "0"});*/
-                MainActivity m = (MainActivity)getActivity();
-                m.spa.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
+                MainActivity m = (MainActivity) getActivity();
+                m.spa.update(0);
+                m.spa.update(2);
+                //m.spa.notifyDataSetChanged();
+                Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();
 //                Log.d("fragment1",E.getText().toString());
             }
         });
         bt_sch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] projection = {"pingtai","zhanghu","benjin","piaoli","shijian","suodingqi","hongbao","fanxian","beizhu","state"};
-                Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI,projection,"_id =" + E_sch.getText().toString(),null,null);
+                String[] projection = {"pingtai", "zhanghu", "benjin", "piaoli", "shijian", "suodingqi", "hongbao", "fanxian", "beizhu", "state"};
+                Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI, projection, "_id =" + E_sch.getText().toString(), null, null);
                 cursor.moveToFirst();
                 E_pingtai.setText(cursor.getString(0));
                 E_zhanghu.setText(cursor.getString(1));
@@ -153,9 +156,9 @@ public class fragment1 extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (App.str2int(E_benjin)>0 && App.str2int(E_suodingqi)>0){
-                E_nianhua.setText(String.format(Locale.getDefault(),"%.1f",(App.str2int(E_hongbao)
-                        +App.str2int(E_fanxian))/App.str2int(E_benjin)*36500/App.str2int(E_suodingqi)+App.str2int(E_piaoli)));
+            if (App.str2int(E_benjin) > 0 && App.str2int(E_suodingqi) > 0) {
+                E_nianhua.setText(String.format(Locale.getDefault(), "%.1f", (App.str2int(E_hongbao)
+                        + App.str2int(E_fanxian)) / App.str2int(E_benjin) * 36500 / App.str2int(E_suodingqi) + App.str2int(E_piaoli)));
             }
         }
     };
@@ -171,6 +174,7 @@ public class fragment1 extends Fragment {
         }
         return mMainView;
     }
+
 
     @Override
     public void onDestroy() {
