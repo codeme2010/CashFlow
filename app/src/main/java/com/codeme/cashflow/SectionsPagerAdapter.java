@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+import android.util.Range;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -47,36 +48,42 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        String name = makeFragmentName(container.getId(), (int) getItemId(position));
-        if(mTagList.size()==0||!mTagList.toString().contains(name)){
-            mTagList.add(position, name);
+//        String name = makeFragmentName(container.getId(), (int) getItemId(position));
+        if (mTagList == null) {
+            for (int i = 0; i < 4; i++) {
+                mTagList.add(i, "android:switcher:" + container.getId() + ":" + i);
+            }
         }
         return super.instantiateItem(container, position);
     }
 
     @Override
-    public int getItemPosition(Object object)
-    {
+    public int getItemPosition(Object object) {
         return super.getItemPosition(object);
     }
 
     // FragmentPageAdapter源码里给 Fragment 生成标签的方法
     private String makeFragmentName(int viewId, int index) {
-        Log.e("instantiateItem: ", viewId + ":" + index + "****" +mTagList.size());
-        return "android:switcher:" + viewId + ":" + index;
+        String name = "android:switcher:" + viewId + ":" + index;
+        if (mTagList.size() == 0) {
+            mTagList.add(0, name);
+        }
+        Log.e("instantiateItem: ", viewId + ":" + index + "****" + mTagList.size());
+        return name;
     }
 
-    public void update(int position){
+    void update(int position) {
         try {
-        Fragment fragment = fm.findFragmentByTag(mTagList.get(position));
-            switch (position){
+            Fragment fragment = fm.findFragmentByTag(mTagList.get(position));
+            switch (position) {
                 case 0:
-                    ((fragment0)fragment).update();break;
+                    ((fragment0) fragment).update();
+                    break;
                 case 2:
-                    ((fragment2)fragment).update();break;
+                    ((fragment2) fragment).update();
+                    break;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Log.e("****", e.getMessage());
         }
 
