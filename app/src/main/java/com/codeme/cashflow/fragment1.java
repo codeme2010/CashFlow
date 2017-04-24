@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,8 +28,10 @@ import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
-    EditText E_pingtai, E_zhanghu, E_benjin, E_shijian, E_suodingqi, E_piaoli, E_hongbao, E_fanxian, E_nianhua, E_beizhu, E_sch;
+    EditText E_pingtai, E_zhanghu, E_benjin, E_shijian, E_suodingqi, E_piaoli, E_hongbao, E_fanxian, E_nianhua, E_beizhu;
     Date date;
+    Button bt;
+    Uri uri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class fragment1 extends Fragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment1, (ViewGroup) getActivity().findViewById(R.id.container), false);
+        final MainActivity m = (MainActivity) getActivity();
         E_pingtai = (EditText) mMainView.findViewById(R.id.et_平台);
         E_zhanghu = (EditText) mMainView.findViewById(R.id.et_账户);
         E_benjin = (EditText) mMainView.findViewById(R.id.et_本金);
@@ -47,7 +51,6 @@ public class fragment1 extends Fragment {
         E_fanxian = (EditText) mMainView.findViewById(R.id.et_返现);
         E_nianhua = (EditText) mMainView.findViewById(R.id.et_折合年化);
         E_beizhu = (EditText) mMainView.findViewById(R.id.et_备注);
-        E_sch = (EditText) mMainView.findViewById(R.id.et_查询);
 
         E_benjin.addTextChangedListener(tw);
         E_suodingqi.addTextChangedListener(tw);
@@ -84,11 +87,11 @@ public class fragment1 extends Fragment {
             }
         });
 
-        Button bt = (Button) mMainView.findViewById(R.id.bt_记入);
-        Button bt_sch = (Button) mMainView.findViewById(R.id.bt_查询);
+        bt = (Button) mMainView.findViewById(R.id.bt_记入);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String s;
                 ContentValues values = new ContentValues();
                 values.put("pingtai", E_pingtai.getText().toString());
                 values.put("zhanghu", E_zhanghu.getText().toString());
@@ -100,8 +103,15 @@ public class fragment1 extends Fragment {
                 values.put("fanxian", E_fanxian.getText().toString());
                 values.put("nianhua", E_nianhua.getText().toString());
                 values.put("beizhu", E_beizhu.getText().toString());
-                values.put("state", "0");
-                getContext().getContentResolver().insert(App.CONTENT_URI, values);
+                if (bt.getText().toString().equals("记入")) {
+                    values.put("state", "0");
+                    getContext().getContentResolver().insert(App.CONTENT_URI, values);
+                    s = "记入成功";
+                } else {
+                    getContext().getContentResolver().update(uri, values, null, null);
+                    s = "修改成功";
+                    bt.setText("记入");
+                }
  /*
                 App.db.execSQL("insert into cashflow (pingtai, zhanghu, benjin, piaoli, shijian, " +
                                 "suodingqi, hongbao, fanxian, nianhua, beizhu, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -116,31 +126,31 @@ public class fragment1 extends Fragment {
                                 E_nianhua.getText().toString(),
                                 E_beizhu.getText().toString(),
                                 "0"});*/
-                MainActivity m = (MainActivity) getActivity();
-                m.spa.update(0);
-                m.spa.update(2);
+                m.spa.update(0, null);
+                m.spa.update(2, null);
                 //m.spa.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
 //                Log.d("fragment1",E.getText().toString());
             }
         });
-        bt_sch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String[] projection = {"pingtai", "zhanghu", "benjin", "piaoli", "shijian", "suodingqi", "hongbao", "fanxian", "beizhu", "state"};
-                Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI, projection, "_id =" + E_sch.getText().toString(), null, null);
-                cursor.moveToFirst();
-                E_pingtai.setText(cursor.getString(0));
-                E_zhanghu.setText(cursor.getString(1));
-                E_benjin.setText(cursor.getString(2));
-                E_piaoli.setText(cursor.getString(3));
-                E_shijian.setText(cursor.getString(4));
-                E_suodingqi.setText(cursor.getString(5));
-                E_hongbao.setText(cursor.getString(6));
-                E_fanxian.setText(cursor.getString(7));
-                E_beizhu.setText(cursor.getString(8));
-            }
-        });
+    }
+
+    public void sch(String id) {
+        uri = Uri.withAppendedPath(App.CONTENT_URI, id);
+        String[] projection = {"pingtai", "zhanghu", "benjin", "piaoli", "shijian", "suodingqi", "hongbao", "fanxian", "beizhu", "state"};
+        Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI, projection, "_id =" + id, null, null);
+        cursor.moveToFirst();
+        E_pingtai.setText(cursor.getString(0));
+        E_zhanghu.setText(cursor.getString(1));
+        E_benjin.setText(cursor.getString(2));
+        E_piaoli.setText(cursor.getString(3));
+        E_shijian.setText(cursor.getString(4));
+        E_suodingqi.setText(cursor.getString(5));
+        E_hongbao.setText(cursor.getString(6));
+        E_fanxian.setText(cursor.getString(7));
+        E_beizhu.setText(cursor.getString(8));
+        cursor.close();
+        bt.setText("修改");
     }
 
     TextWatcher tw = new TextWatcher() {

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -44,6 +46,7 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment2, (ViewGroup)getActivity().findViewById(R.id.container), false);
 
+        final MainActivity m = (MainActivity)getActivity();
         lv = (ListView)mMainView.findViewById(R.id.lv);
         cb = (CheckBox)mMainView.findViewById(R.id.cb);
         tv = (TextView)mMainView.findViewById(R.id.zongji);
@@ -97,7 +100,7 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 state = Integer.parseInt(((TextView)view.findViewById(R.id.state)).getText().toString());
                 String s = "        状态:";
-                final String[] item = {"刚投资完成"+s+" 0", "已返现成功"+s+" 1", "已申请提现"+s+" 2", "已回款完成"+s+" 3", "删除此记录"};
+                final String[] item = {"刚投资完成"+s+" 0", "已返现成功"+s+" 1", "已申请提现"+s+" 2", "已回款完成"+s+" 3", "修改此记录", "删除此记录"};
                 final String _id = ((TextView)view.findViewById(R.id.id)).getText().toString();
                 new AlertDialog.Builder(getActivity())
                         .setTitle("请选择对ID" + _id + "的操作")
@@ -111,21 +114,26 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Uri uri = Uri.withAppendedPath(App.CONTENT_URI,_id);
-                                if (state == 4){
-                                    getContext().getContentResolver().delete(uri,null,null);
-                                    /*App.db.execSQL("delete from cashflow where _id = ?",
-                                            new String[]{_id});*/
+                                switch (state){
+                                    case 4:
+                                        m.spa.update(1,_id);
+                                        m.mViewPager.setCurrentItem(1);
+                                        break;
+                                    case 5:
+                                        getContext().getContentResolver().delete(uri,null,null);
+//                                        App.db.execSQL("delete from cashflow where _id = ?", new String[]{_id});
+                                        update();
+                                        m.spa.update(2,null);
+                                        break;
+                                    default:
+                                        ContentValues values = new ContentValues();
+                                        values.put("state",state);
+                                        getContext().getContentResolver().update(uri,values,null,null);
+//                                        App.db.execSQL("update cashflow set state = ? where _id = ?", new String[]{String.valueOf(state),_id});
+                                        update();
+                                        m.spa.update(2,null);
                                 }
-                                else{
-                                    ContentValues values = new ContentValues();
-                                    values.put("state",state);
-                                    getContext().getContentResolver().update(uri,values,null,null);
-                                    /*App.db.execSQL("update cashflow set state = ? where _id = ?",
-                                            new String[]{String.valueOf(state),_id});*/
-                                }
-                                update();
-                                MainActivity m = (MainActivity)getActivity();
-                                m.spa.update(2);
+
                             }
                         })
                         .setNegativeButton("取消",null)

@@ -49,7 +49,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 //        String name = makeFragmentName(container.getId(), (int) getItemId(position));
-        if (mTagList == null) {
+        if (mTagList.size() == 0) {
             for (int i = 0; i < 4; i++) {
                 mTagList.add(i, "android:switcher:" + container.getId() + ":" + i);
             }
@@ -72,12 +72,15 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
         return name;
     }
 
-    void update(int position) {
+    void update(int position,String id) {
         try {
             Fragment fragment = fm.findFragmentByTag(mTagList.get(position));
             switch (position) {
                 case 0:
                     ((fragment0) fragment).update();
+                    break;
+                case 1:
+                    ((fragment1) fragment).sch(id);
                     break;
                 case 2:
                     ((fragment2) fragment).update();

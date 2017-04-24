@@ -211,20 +211,7 @@
             android:text="记入" />
 
         <TableRow>
-            <Button
-                android:id="@+id/bt_查询"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1dp"
-                android:text="查询ID" />
-            <EditText
-                android:id="@+id/et_查询"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="14sp" />
+
         </TableRow>
     </TableLayout>
 </ScrollView>

@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     List<Fragment> fragmentList = null;
     ArrayList<String> titleList = null;
     SectionsPagerAdapter spa;
+    ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         titleList.add("账户信息");
 
         spa = new SectionsPagerAdapter(getSupportFragmentManager(),fragmentList, titleList);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(spa);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
