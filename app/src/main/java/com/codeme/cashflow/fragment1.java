@@ -7,11 +7,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +25,19 @@ import java.util.Locale;
 
 public class fragment1 extends Fragment {
     private View mMainView;
-    EditText E_pingtai, E_zhanghu, E_benjin, E_shijian, E_suodingqi, E_piaoli, E_hongbao, E_fanxian, E_nianhua, E_beizhu;
-    Date date;
-    Button bt;
-    Uri uri;
+    private EditText E_pingtai;
+    private EditText E_zhanghu;
+    private EditText E_benjin;
+    private EditText E_shijian;
+    private EditText E_suodingqi;
+    private EditText E_piaoli;
+    private EditText E_hongbao;
+    private EditText E_fanxian;
+    private EditText E_nianhua;
+    private EditText E_beizhu;
+    private Date date;
+    private Button bt;
+    private Uri uri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,7 +159,7 @@ public class fragment1 extends Fragment {
         bt.setText("修改");
     }
 
-    TextWatcher tw = new TextWatcher() {
+    private final TextWatcher tw = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -185,35 +191,5 @@ public class fragment1 extends Fragment {
         return mMainView;
     }
 
-
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-    }
-
-    @Override
-    public void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-    }
 
 }

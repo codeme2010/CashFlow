@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -27,17 +25,12 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
-    View mMainView;
-    CheckBox cb;
-    EditText et;
-    Boolean isC = false;
-    ListView lv;
-    TextView tv;
-    SimpleCursorAdapter adapter;
-    Cursor cursor;
-    int state;
-    String selection = null;
-    String sch_Key = null;
+    private View mMainView;
+    private Boolean isC = false;
+    private TextView tv;
+    private SimpleCursorAdapter adapter;
+    private int state;
+    private String sch_Key = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -47,10 +40,10 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
         mMainView = inflater.inflate(R.layout.fragment2, (ViewGroup)getActivity().findViewById(R.id.container), false);
 
         final MainActivity m = (MainActivity)getActivity();
-        lv = (ListView)mMainView.findViewById(R.id.lv);
-        cb = (CheckBox)mMainView.findViewById(R.id.cb);
+        ListView lv = (ListView) mMainView.findViewById(R.id.lv);
+        CheckBox cb = (CheckBox) mMainView.findViewById(R.id.cb);
         tv = (TextView)mMainView.findViewById(R.id.zongji);
-        et = (EditText)mMainView.findViewById(R.id.et_sch_Key);
+        EditText et = (EditText) mMainView.findViewById(R.id.et_sch_Key);
         /*cursor = getContext().getContentResolver().query(App.CONTENT_URI,
                 new String[]{"sum(round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state " +
                         "when 0 then fanxian else 0 end),1)) as zongji"},"state<>3",null,null);
@@ -156,44 +149,14 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
     }
 
     public void update() {
-        cursor = getContext().getContentResolver().query(App.CONTENT_URI,
+        Cursor cursor = getContext().getContentResolver().query(App.CONTENT_URI,
                 new String[]{"sum(round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state " +
-                        "when 0 then fanxian else 0 end),1)) as zongji"}, "state<>3" + (sch_Key==null?"":" and " + sch_Key), null, null);
+                        "when 0 then fanxian else 0 end),1)) as zongji"}, "state<>3" + (sch_Key == null ? "" : " and " + sch_Key), null, null);
         if (cursor != null) {
             cursor.moveToFirst();
-            tv.setText("待回合计：" + (cursor.getString(0)==null?"0":cursor.getString(0)));
+            tv.setText("待回合计：" + (cursor.getString(0)==null?"0": cursor.getString(0)));
             cursor.close();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-    }
-
-    @Override
-    public void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
     }
 
     @Override
@@ -201,7 +164,7 @@ public class fragment0 extends Fragment implements LoaderManager.LoaderCallbacks
         String[] projection = {"_id", "pingtai", "zhanghu", "date(shijian,'+'||suodingqi||' day') as huikuanriqi", "state","cast(round(nianhua,0)as int)||'%' as nianhua",
                 "'￥'||round(benjin*piaoli*suodingqi/36500+benjin+hongbao+(case state when 0 then fanxian else 0 end),1) as huikuan",
                 "'￥'||cast(round(benjin,0)as int)||' + '||cast(round(hongbao,0)as int)||' + '||cast(round(fanxian,0)as int)||' + '||piaoli||'%' as benjin", "shijian||' + '||suodingqi||'天' as shijian", "beizhu"};
-        selection = sch_Key==null ? (isC ? "" : "state <> 3") : sch_Key + (isC ? "" : "and state <> 3");
+        String selection = sch_Key == null ? (isC ? "" : "state <> 3") : sch_Key + (isC ? "" : "and state <> 3");
         //selection = isC ? null : "state <> 3";
         return new CursorLoader(getContext(), App.CONTENT_URI, projection, selection, null, " huikuanriqi");
     }

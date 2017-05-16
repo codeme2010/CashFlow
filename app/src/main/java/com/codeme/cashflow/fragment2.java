@@ -8,7 +8,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +17,12 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    View mMainView;
-    ListView lv, lv_mingxi;
-    SimpleCursorAdapter adapter, adapter_mingxi;
-    String month;
-    Cursor cursor;
-    TextView tv;
+    private View mMainView;
+    private SimpleCursorAdapter adapter;
+    private SimpleCursorAdapter adapter_mingxi;
+    private String month;
+    private Cursor cursor;
+    private TextView tv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,8 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
         cursor.moveToFirst();
         tv.setText("总计：" + cursor.getString(0));
         cursor.close();
-        lv = (ListView) mMainView.findViewById(R.id.lv_baobiao);
-        lv_mingxi = (ListView) mMainView.findViewById(R.id.lv_mingxi);
+        ListView lv = (ListView) mMainView.findViewById(R.id.lv_baobiao);
+        ListView lv_mingxi = (ListView) mMainView.findViewById(R.id.lv_mingxi);
         String[] uiBindFrom0 = {"month", "heji"};
         int[] uiBindTo0 = {R.id.month_baobiao, R.id.sum_baobiao};
         String[] uiBindFrom1 = {"pingtai", "heji"};
@@ -87,36 +86,6 @@ public class fragment2 extends Fragment implements LoaderManager.LoaderCallbacks
         cursor.close();
         getLoaderManager().restartLoader(30, null, this);
         getLoaderManager().restartLoader(31, null, this);
-    }
-
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-    }
-
-    @Override
-    public void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
     }
 
     @Override

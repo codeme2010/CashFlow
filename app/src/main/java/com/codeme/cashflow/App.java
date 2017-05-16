@@ -3,16 +3,15 @@ package com.codeme.cashflow;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.view.View;
 import android.widget.EditText;
 
 import com.shamanland.fonticon.FontIconTypefaceHolder;
 
 
 public class App extends Application {
-    public static String DATABASE_PATH = System.getenv("EXTERNAL_STORAGE") + "/cashflow/";
-    public static String TABLE = "CashFlow";
-    public static String databaseFilename = DATABASE_PATH + "cashflow1.db";
+    public static final String DATABASE_PATH = System.getenv("EXTERNAL_STORAGE") + "/cashflow/";
+    public static final String TABLE = "CashFlow";
+    public static final String databaseFilename = DATABASE_PATH + "cashflow1.db";
     public static final String AUTHORITY = "com.codeme.cashflow.Provider";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/CashFlow");
     public static SQLiteDatabase db;

@@ -18,11 +18,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
-	View mMainView;
-	EditText et;
-	ListView lv;
-	SimpleCursorAdapter adapter;
-	String selection = null;
+	private View mMainView;
+	private SimpleCursorAdapter adapter;
+	private String selection = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -30,8 +28,8 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = inflater.inflate(R.layout.fragment4, (ViewGroup)getActivity().findViewById(R.id.container), false);
-		et = (EditText)mMainView.findViewById(R.id.et);
-		lv = (ListView)mMainView.findViewById(R.id.lv_account);
+		EditText et = (EditText) mMainView.findViewById(R.id.et);
+		ListView lv = (ListView) mMainView.findViewById(R.id.lv_account);
 
 		String[] uiBindFrom = {"pingtai","zhanghu"};
 		int[] uiBindTo = {R.id.pingtai, R.id.zhanghu};
@@ -80,37 +78,7 @@ public class fragment3 extends Fragment implements LoaderManager.LoaderCallbacks
 		return mMainView;
 	}
 
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-
-	@Override
-	public void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
-
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-	}
-
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-	}
-
-	@Override
-	public void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-	}
-
-	@Override
+    @Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		Uri uri = App.CONTENT_URI;
 		String[] projection = { "_id", "pingtai", "zhanghu" };

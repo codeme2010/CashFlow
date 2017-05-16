@@ -210,8 +210,5 @@
             android:layout_marginRight="20dp"
             android:text="记入" />
 
-        <TableRow>
-
-        </TableRow>
     </TableLayout>
 </ScrollView>

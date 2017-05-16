@@ -16,8 +16,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Fragment> fragmentList = null;
-    ArrayList<String> titleList = null;
     SectionsPagerAdapter spa;
     ViewPager mViewPager;
 
@@ -30,19 +28,19 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        fragmentList = new ArrayList<>();
+        List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new fragment0());
         fragmentList.add(new fragment1());
         fragmentList.add(new fragment2());
         fragmentList.add(new fragment3());
 
-        titleList = new ArrayList<>();
+        ArrayList<String> titleList = new ArrayList<>();
         titleList.add("回款明细");
         titleList.add("记账");
         titleList.add("月报表");
         titleList.add("账户信息");
 
-        spa = new SectionsPagerAdapter(getSupportFragmentManager(),fragmentList, titleList);
+        spa = new SectionsPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(spa);
 

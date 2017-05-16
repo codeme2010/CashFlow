@@ -10,10 +10,10 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 
 public class Provider extends ContentProvider {
-    static final int DIR = 0;
-    static final int ITEM = 1;
-    static final int group = 2;
-    static UriMatcher uriMatcher;
+    private static final int DIR = 0;
+    private static final int ITEM = 1;
+    private static final int group = 2;
+    private static final UriMatcher uriMatcher;
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(App.AUTHORITY,"CashFlow",DIR);
