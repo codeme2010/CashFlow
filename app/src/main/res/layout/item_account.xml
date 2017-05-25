@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
     
     <TextView
-        android:id="@+id/pingtai"
+        android:id="@+id/pingtai3"
         android:layout_width="150dp"
         android:layout_height="25dp"
         android:ellipsize="end"
@@ -18,7 +18,7 @@
         android:background="#666666" />
     
     <TextView
-        android:id="@+id/zhanghu"
+        android:id="@+id/zhanghu3"
         android:layout_width="180dp"
         android:layout_height="25dp"
         android:ellipsize="end"

@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/pingtai"
+            android:id="@+id/pingtai2"
             android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"
@@ -17,7 +17,7 @@
             android:layout_height="25dp"
             android:background="#666666" />
         <TextView
-            android:id="@+id/sum"
+            android:id="@+id/sum2"
             android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"

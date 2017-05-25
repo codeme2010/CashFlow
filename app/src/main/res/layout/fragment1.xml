@@ -22,7 +22,7 @@
                 android:text="平台" />
 
             <EditText
-                android:id="@+id/et_平台"
+                android:id="@+id/et_pingtai1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:imeOptions="actionNext"
@@ -42,7 +42,7 @@
                 android:text="账户" />
 
             <EditText
-                android:id="@+id/et_账户"
+                android:id="@+id/et_zhanghu1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:imeOptions="actionNext"
@@ -61,7 +61,7 @@
                 android:text="本金(元)" />
 
             <EditText
-                android:id="@+id/et_本金"
+                android:id="@+id/et_benjin1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -80,7 +80,7 @@
                 android:text="投资时间" />
 
             <com.shamanland.fonticon.FontIconEditText
-                android:id="@+id/et_时间"
+                android:id="@+id/et_shijian1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -100,7 +100,7 @@
                 android:text="锁定期(天)" />
 
             <EditText
-                android:id="@+id/et_锁定期"
+                android:id="@+id/et_suodingqi1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -119,7 +119,7 @@
                 android:text="票利(%)" />
 
             <EditText
-                android:id="@+id/et_票利"
+                android:id="@+id/et_piaoli1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -138,7 +138,7 @@
                 android:text="红包" />
 
             <EditText
-                android:id="@+id/et_红包"
+                android:id="@+id/et_hongbao1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -157,7 +157,7 @@
                 android:text="返现" />
 
             <EditText
-                android:id="@+id/et_返现"
+                android:id="@+id/et_fanxian1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -176,7 +176,7 @@
                 android:text="折合年化(%)" />
 
             <EditText
-                android:id="@+id/et_折合年化"
+                android:id="@+id/et_zhehenianhua1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -193,7 +193,7 @@
                 android:text="备注" />
 
             <EditText
-                android:id="@+id/et_备注"
+                android:id="@+id/et_beizhu1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -203,15 +203,12 @@
         </TableRow>
 
         <Button
-            android:id="@+id/bt_记入"
+            android:id="@+id/bt_jiru1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="记入" />
 
-        <TableRow>
-
-        </TableRow>
     </TableLayout>
 </ScrollView>

@@ -1,49 +1,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:tag="fg2">
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="start|center"
+        android:id="@+id/sum_all"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#666666" />
     <LinearLayout
-        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/zongji"
-            android:layout_marginLeft="5dp"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:gravity="start|center"
-            tools:text="待收总计:200000"/>
-        <EditText
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_sch_Key"
-            android:textSize="14sp"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center"
-            tools:text="陆金所"/>
+            android:text="月份"
+            android:maxLines="1"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#666666" />
         <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:gravity="end|center"
-            android:text="显示全部"/>
-        <CheckBox
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:id="@+id/cb" />
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="总计"
+            android:maxLines="1" />
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#666666" />
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#666666" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="平台"
+            android:maxLines="1"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="25dp"
+            android:background="#666666" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="合计"
+            android:maxLines="1" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#666666" />
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="0dp"
-        android:id="@+id/lv"/>
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:listSelector="@color/colorAccent"
+            android:id="@+id/lv_baobiao">
+        </ListView>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#666666" />
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#666666" />
+        <ListView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/lv_mingxi">
+        </ListView>
 
+    </LinearLayout>
 
 </LinearLayout>

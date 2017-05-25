@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/id0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2.5"
@@ -19,7 +19,7 @@
                     android:gravity="center"
                     tools:text="_id"/>
                 <TextView
-                    android:id="@+id/pingtai"
+                    android:id="@+id/pingtai0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -27,7 +27,7 @@
                     android:gravity="center"
                     tools:text="平台" />
                 <TextView
-                    android:id="@+id/zhanghu"
+                    android:id="@+id/zhanghu0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
@@ -36,7 +36,7 @@
                     tools:text="账户"
                     />
                 <TextView
-                    android:id="@+id/huikuan"
+                    android:id="@+id/huikuan0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
@@ -44,7 +44,7 @@
                     android:gravity="center"
                     tools:text="回款"/>
                 <TextView
-                    android:id="@+id/huikuanriqi"
+                    android:id="@+id/huikuanriqi0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -52,7 +52,7 @@
                     android:gravity="center"
                     tools:text="回款日期"/>
                 <TextView
-                    android:id="@+id/state"
+                    android:id="@+id/state0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -61,7 +61,7 @@
                     android:textColor="#08F"
                     tools:text="状态"/>
                 <TextView
-                    android:id="@+id/nianhua"
+                    android:id="@+id/nianhua0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/shijian"
+                    android:id="@+id/shijian0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -82,7 +82,7 @@
                     android:textColor="#AAA"
                     tools:text="投资日期" />
                 <TextView
-                    android:id="@+id/benjin"
+                    android:id="@+id/benjin0"
                     android:paddingLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     android:textColor="#AAA"
                     tools:text="本金"/>
                 <TextView
-                    android:id="@+id/beizhu"
+                    android:id="@+id/beizhu0"
                     android:paddingLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
