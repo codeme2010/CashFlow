@@ -4,13 +4,8 @@ import android.app.Application
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.widget.EditText
-import com.shamanland.fonticon.FontIconTypefaceHolder
 
 class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        FontIconTypefaceHolder.init(assets, "fontawesome-webfont.ttf")
-    }
 
     companion object {
         val DATABASE_PATH = System.getenv("EXTERNAL_STORAGE") + "/cashflow/"

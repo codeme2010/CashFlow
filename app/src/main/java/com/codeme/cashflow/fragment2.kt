@@ -83,6 +83,7 @@ class fragment2 : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             30 -> {
                 projection = arrayOf("_id", "strftime('%Y-%m',shijian) as month", "round(sum(benjin*piaoli*suodingqi/36500+hongbao+fanxian)) as heji")
                 uri = Uri.withAppendedPath(uri, "group/month")
+                sortOrder = "month desc"
             }
             31 -> {
                 selection = "strftime('%Y-%m',shijian)='$month'"

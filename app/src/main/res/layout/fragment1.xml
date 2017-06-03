@@ -1,5 +1,4 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -79,15 +78,14 @@
                 android:gravity="end|center_vertical"
                 android:text="投资时间" />
 
-            <com.shamanland.fonticon.FontIconEditText
+            <EditText
                 android:id="@+id/et_shijian1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textSize="14sp"
-                app:iconRight="@xml/ic_right" />
+                android:textSize="14sp" />
         </TableRow>
 
         <TableRow>
